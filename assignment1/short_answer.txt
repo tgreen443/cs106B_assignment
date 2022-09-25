@@ -1,0 +1,59 @@
+Before submitting this file, make sure that there are no more TODO
+placeholders remaining in the file (and remove this comment too).
+
+Perfect Numbers
+---------------
+
+Before submitting this file, make sure that there are no more TODO
+placeholders remaining in the file (and remove this comment too).
+
+Q1. Roughly how long did it take your computer to do the search? How many perfect numbers were found and what were they?
+A1.
+ 1.367s, 4 perfect number : 6 28 496 8128;
+Q2. Record the timing results for `findPerfects` that you observed into a table.
+A2.
+ size=10 0.138s
+ size=200 0.141s
+ size=10000 0.300s
+ size=300000 64.213s
+Q3. Does it take the same amount of work to compute `isPerfect` on the number 10 as it does on the number 1000? Why or why not? Does it take the same amount of work for `findPerfects` to search the range of numbers from 1-1000 as it does to search the numbers from 1000-2000? Why or why not?
+A3.
+ 不一样，divisorSum 对于10需要循环十次,对于1000循环1000次
+ no, we need to sum every work for 'isPerfect' in search , in the range of 1000-2000,every 'isPerfect' work have more loops than that in 0-1000.
+Q4. Extrapolate from the data you gathered and make a prediction: how long will it take `findPerfects` to reach the fifth perfect number?
+A4.4.4万年
+
+Q5. Do any of the tests still pass even with this broken function? Why or why not?
+A5. "divisorSum"和"isPerfect" 不会通过 . 因为"isPerfect" 调用了函数 "divisorSum"
+
+Q6. Describe the testing strategy you used for your test cases to confirm `smarterSum` is working correctly.
+A6. 使用相等测试看smarterSum与原来的divisorSum是否相等
+
+Q7. Record your timing results for `findPerfectsSmarter` into a table.
+A7. size =       10 completed in    0.094 secs
+    size =      100 completed in    0.127 secs
+    size =     1000 completed in    0.149 secs
+    size = 15000000 completed in   91.174 secs
+
+Q8. Make a prediction: how long will `findPerfectsSmarter` take to reach the fifth perfect number?
+A8. 18年
+
+Q9. Explain how you chose your specific test cases and why they lead you to be confident `findNthPerfectEuclid` is working correctly.
+A9.使用前四个完全数测试找到的是否与正确值相等。
+
+Soundex
+-------
+
+Q10. What is the Soundex code for "Angelou"? What is the code for your own surname?
+A10. TODO
+
+Q11. Before writing any code, brainstorm your plan of attack and sketch how you might decompose the work into smaller tasks. Briefly describe your decomposition strategy.
+A11. 按照题目给出的soundex算法步骤逐一解决，注意合并重复字符以及删除0时候的边界条件以及字符串长度带来的影响。
+
+Q12. Think about one or more examples of a class of names that the Soundex system might not work well for. Explain what this class of names is and why the system might incorrectly group them or mis-categorize one of the names.
+A12.
+
+Q13. Suppose you are a software engineer working for the U.S. government. You have been tasked with implementing a system that collects names as part of the Census survey and analyzes these names using a phonetic algorithm. Your boss suggests using Soundex and notes that the algorithm is only expected to work for ASCII-encoded strings, since supporting Unicode would require extra work and time. What would your response be and why? What representational harms might result from building a system that exclusively uses Soundex and/or ASCII?
+A13. TODO
+
+
