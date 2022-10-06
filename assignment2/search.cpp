@@ -137,7 +137,7 @@ void searchEngine(string dbfile)
     string query;
     while(true){
         query = getLine("Enter query sentence (RETURN/ENTER to quit):");
-        if(query=="\n"){
+        if(query==""){
             break;
         }
         Set<string> matchResults =findQueryMatches(index,query);
