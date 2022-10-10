@@ -33,7 +33,6 @@ string operatorsFrom(string str) {
  * header comment.
  */
 bool operatorsAreMatched(string ops) {
-/*
     Stack<char> parens;
     for (int i = 0; i < (int) ops.length(); i++) {
         char c = ops[i];
@@ -54,14 +53,6 @@ bool operatorsAreMatched(string ops) {
         return true; // balanced
     } else {
         return false;
-    }
-*/
-    int opsSize = ops.size();
-    if(opsSize == 0){
-        return false;
-    }
-    else{
-
     }
 
 }
