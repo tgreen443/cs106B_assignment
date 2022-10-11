@@ -33,6 +33,7 @@ string operatorsFrom(string str) {
  * header comment.
  */
 bool operatorsAreMatched(string ops) {
+    /*
     Stack<char> parens;
     for (int i = 0; i < (int) ops.length(); i++) {
         char c = ops[i];
@@ -54,7 +55,32 @@ bool operatorsAreMatched(string ops) {
     } else {
         return false;
     }
-
+*/
+    //递归
+    int Len= ops.size();
+    if(Len==0){
+        return true;
+    }
+    bool flag = false;
+    if(stringContains(ops,"()")){
+        int bracketIndex = stringIndexOf(ops,"()");
+        ops.erase(bracketIndex,2);
+        flag = true;
+    }
+    if(stringContains(ops,"[]")){
+        int bracketIndex = stringIndexOf(ops,"[]");
+        ops.erase(bracketIndex,2);
+        flag = true;
+    }
+    if(stringContains(ops,"{}")){
+        int bracketIndex = stringIndexOf(ops,"{}");
+        ops.erase(bracketIndex,2);
+        flag = true;
+    }
+    if(!flag){
+        return false;
+    }
+    return operatorsAreMatched(ops);
 }
 
 /*
