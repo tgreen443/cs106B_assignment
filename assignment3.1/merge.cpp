@@ -65,24 +65,20 @@ Queue<int> naiveMultiMerge(Vector<Queue<int>>& all) {
  * TODO: Replace this comment with a descriptive function
  * header comment.
  */
+Queue<int> recMultiMergeRec(Vector<Queue<int>>& all,int head,int tail) {
+    if (head==tail){
+        return all[head];
+    }else{
+            int middle = (tail-head)/2+head;
+            return binaryMerge(recMultiMergeRec(all,head,middle),recMultiMergeRec(all,middle+1,tail));
+        }
+}
 Queue<int> recMultiMerge(Vector<Queue<int>>& all) {
-    Queue<int> result;
-    int aLen = all.size();
-    if (all.isEmpty()){
+    int allLen=all.size();
+    if(allLen==0){
         return {};
-    }
-    if (aLen==1){
-        return all[0];
-    }
-    else{
-        if(aLen==2){
-            return binaryMerge(all[0],all[1]);
-        }
-        else{
-            auto head = all.subList(0,aLen/2);
-            auto tail = all.subList(aLen/2,aLen-aLen/2);
-            return binaryMerge(recMultiMerge(head),recMultiMerge(tail));
-        }
+    }else{
+        return recMultiMergeRec(all,0,allLen-1);
     }
 }
 
@@ -91,7 +87,7 @@ Queue<int> recMultiMerge(Vector<Queue<int>>& all) {
 
 Queue<int> createSequence(int size);
 void distribute(Queue<int> input, Vector<Queue<int>>& all);
-
+/*
 PROVIDED_TEST("binaryMerge, two short sequences") {
     Queue<int> a = {2, 4, 5};
     Queue<int> b = {1, 3, 3};
@@ -111,7 +107,7 @@ PROVIDED_TEST("naiveMultiMerge, small collection of short sequences") {
     Queue<int> expected = {-5, -5, 1, 3, 5, 5, 6, 9, 9, 9, 9, 12, 100, 3402};
     EXPECT_EQUAL(naiveMultiMerge(all), expected);
 }
-
+*/
 PROVIDED_TEST("recMultiMerge, compare to naiveMultiMerge") {
     int n = 20;
     Queue<int> input = createSequence(n);
@@ -119,6 +115,7 @@ PROVIDED_TEST("recMultiMerge, compare to naiveMultiMerge") {
     distribute(input, all);
     EXPECT_EQUAL(recMultiMerge(all), naiveMultiMerge(all));
 }
+/*
 
 PROVIDED_TEST("Time binaryMerge operation") {
     int n = 1000000;
@@ -144,7 +141,7 @@ PROVIDED_TEST("Time recMultiMerge operation") {
     TIME_OPERATION(input.size(), recMultiMerge(all));
 }
 
-
+*/
 /* Test helper to fill queue with sorted sequence */
 Queue<int> createSequence(int size) {
     Queue<int> q;
@@ -162,7 +159,7 @@ void distribute(Queue<int> input, Vector<Queue<int>>& all) {
     }
 }
 
-
+/*
 STUDENT_TEST("binaryMerge test ") {
     Queue<int> a = {1,2, 2, 4, 4, 5, 8 ,9 };
     Queue<int> b = {1, 3, 3};
@@ -178,3 +175,4 @@ STUDENT_TEST("naiveMultiMerge  empty vector") {
     EXPECT_EQUAL(naiveMultiMerge(allEmp), expected);
 
 }
+*/
