@@ -47,10 +47,9 @@ Set<GridLocation> generateNeighbors (Grid<char> & board,GridLocation &loc,Set<Gr
     }
     return neighbors;
 }
-void scoreBoardRec(Grid<char>& board, Lexicon& lex,string wordStack,Stack<GridLocation> &locStack,GridLocation loc,Set <GridLocation> visitedPoints, Set<GridLocation> neighbors,Set<string> &words){
+void scoreBoardRec(Grid<char>& board, Lexicon& lex,string wordStack,GridLocation loc,Set <GridLocation> visitedPoints, Set<GridLocation> neighbors,Set<string> &words){
     visitedPoints.add(loc);
-    wordStack+=board[loc];
-    locStack.push(loc);    
+    wordStack+=board[loc];    
     if(!isalpha(board[loc])){
         return;
     }
@@ -62,14 +61,17 @@ void scoreBoardRec(Grid<char>& board, Lexicon& lex,string wordStack,Stack<GridLo
         return;
     }
     else{
+        if(!lex.containsPrefix(wordStack)){
+            return;
+        }
         //递归其中一个点
         GridLocation nextLoc=neighbors.last();
         auto nextNeighbors=generateNeighbors (board,nextLoc,visitedPoints);
-        scoreBoardRec(board,lex,wordStack,locStack,nextLoc,visitedPoints,nextNeighbors,words);
+        scoreBoardRec(board,lex,wordStack,nextLoc,visitedPoints,nextNeighbors,words);
         //或者平行的其他点
         neighbors.remove(nextLoc);
         wordStack.pop_back();
-        scoreBoardRec(board,lex,wordStack,locStack,loc,visitedPoints,neighbors,words);
+        scoreBoardRec(board,lex,wordStack,loc,visitedPoints,neighbors,words);
     }
 }
 int scoreBoard(Grid<char>& board,Lexicon &lex) {
@@ -80,13 +82,14 @@ int scoreBoard(Grid<char>& board,Lexicon &lex) {
     Set<string> words;
     for(int i=0;i<row;i++){
         for(int j=0;j<col;j++){
-            Set<GridLocation> visitedPoints;
-            GridLocation loc(i,j);
-            string wordStack;
 
-            Stack<GridLocation> locStack;
-            auto neighbors=generateNeighbors(board,loc,visitedPoints);
-            scoreBoardRec(board,lex,wordStack,locStack,loc,visitedPoints,neighbors,words);
+            GridLocation loc(i,j);
+            if(isalpha(board[loc])){
+                string wordStack;
+                Set<GridLocation> visitedPoints;
+                auto neighbors=generateNeighbors(board,loc,visitedPoints);
+                scoreBoardRec(board,lex,wordStack,loc,visitedPoints,neighbors,words);
+            }
         }
     }
     for(string n:words){
