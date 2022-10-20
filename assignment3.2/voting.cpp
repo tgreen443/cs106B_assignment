@@ -65,7 +65,7 @@ Vector<int> subBlocks(Vector<int> &blocks){
 }
 Vector<int> computePowerIndexes(Vector<int>&blocks)
 {
-    //取出所有子集
+   
     Vector<int> preResult=subBlocks(blocks);
     Vector<int> result(preResult.size(),0);
     int winCounts = blocksSum(preResult);
